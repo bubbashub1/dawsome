@@ -2,6 +2,18 @@
 
 **Status:** Initial agreed direction — planning and verification required before implementation.
 
+## Confirmed staging environment
+
+- Site: `https://staging.dawsomegifts.co.uk`
+- Plugin: **Directorist – Business Directory Solution**
+- Installed version reported by WordPress: **8.12**
+- Developer: **wpWax**
+- Plugin folder/main file shown by WordPress: `directorist/directorist-base.php`
+
+This is the installed version to use as the baseline for the next compatibility and API audit. The GitHub source repository previously identified (`digitalera/directorist`) must not be assumed to match this installed release until its tag/release is checked. Verify the installed plugin's actual source/API before coding against it.
+
+---
+
 ## 1. Product architecture
 
 Bubba Hub will use a hybrid, plugin-first WordPress architecture:
