@@ -82,3 +82,23 @@ The anonymous request is denied with HTTP 401 when the `status=any` filter is su
 - Test the same request as an ordinary logged-in family account and as a leader account.
 - Verify that leader listing retrieval is scoped to listings they own, and that update permissions cannot be used against another user's listing.
 
+## Anonymous pending-status filter test
+
+**Request tested while logged out**
+
+`GET /wp-json/directorist/v2/listings?status=pending&per_page=10`
+
+**Observed response**
+
+```json
+{
+  "code": "directorist_rest_cannot_view",
+  "message": "You are not allowed to read listings with this filter.",
+  "data": { "status": 401 }
+}
+```
+
+**Conclusion**
+
+The anonymous request is denied with HTTP 401 when requesting `status=pending`. Combined with the preceding `status=any` test, two non-public listing filters are confirmed blocked for logged-out requests. This is not yet a complete permission audit: authenticated family and leader roles, ownership scoping, and direct item access still need testing.
+
