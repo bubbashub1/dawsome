@@ -55,3 +55,30 @@ While logged out, request:
 `https://staging.dawsomegifts.co.uk/wp-json/directorist/v2/listings?status=any&per_page=10`
 
 Check whether the response contains only published listings or also pending, draft, private, expired or trashed records. Do not attempt any write or status change during this test.
+
+## Anonymous status=any filter test
+
+**Request tested while logged out**
+
+`GET /wp-json/directorist/v2/listings?status=any&per_page=10`
+
+**Observed response**
+
+```json
+{
+  "code": "directorist_rest_cannot_view",
+  "message": "You are not allowed to read listings with this filter.",
+  "data": { "status": 401 }
+}
+```
+
+**Conclusion**
+
+The anonymous request is denied with HTTP 401 when the `status=any` filter is supplied. This demonstrates that the API does not allow an unauthenticated caller to use this filter to request listings across statuses. It does not establish the access rules for every individual non-public status, nor the permissions available to authenticated leaders. Those require separate tests.
+
+**Next permission tests**
+
+- Test a specific non-public status (for example `status=pending`) while logged out.
+- Test the same request as an ordinary logged-in family account and as a leader account.
+- Verify that leader listing retrieval is scoped to listings they own, and that update permissions cannot be used against another user's listing.
+
